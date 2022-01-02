@@ -7,7 +7,7 @@ from warnings import catch_warnings, simplefilter
 
  
 
-__all__ = ['load_ca_dssp','local_axes', 'axis', 'center_points','tilt_vectors','rotation_vectors','tilt_angle', 'local_tilt_angle','local_rotation_angle','rotation_angle','single_phase','sse_mask','angle_diff','circular_mean','circular_var','circular_std']
+__all__ = ['load_ca_dssp','local_axes', 'axis', 'kink_angle','center_points','tilt_vectors','rotation_vectors','tilt_angle', 'local_tilt_angle','local_rotation_angle','rotation_angle','single_phase','sse_mask','angle_diff','circular_mean','circular_var','circular_std']
 
 
 
@@ -178,16 +178,27 @@ def axis(ca, mask=None, m=0, n=None):
 
 
 
-def tilt_angle(ca, k, mask=None, m=0, n=None):
+def kink_angle(ca, m1, n1, n2, m2, mask=None):
+
+    H1 = axis(ca, mask=mask, m=m1, n=n1)
+    H2 = axis(ca, mask=mask, m=m2, n=n2)
+
+    cosine_of_kink_angle = np.clip( (H1*H2).sum(axis=1), -1.0, 1.0)
+
+    return np.arccos(cosine_of_kink_angle)
+
+
+
+def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
 
     H_mn = axis(ca, mask=mask, m=m, n=n)
-    k = types.k(k)
+    ref_vec = types.k(ref_vec)
 
 
     # we change H_mn to [H_mn] since the dot function is dumm
     H_mn = H_mn.reshape(1,*H_mn.shape)
 
-    cosine_of_tilt_angle = np.clip( dot(H_mn,k), -1.0, 1.0)[0]
+    cosine_of_tilt_angle = np.clip( dot(H_mn,ref_vec), -1.0, 1.0)[0]
 
     return np.arccos( cosine_of_tilt_angle )
 
@@ -210,16 +221,16 @@ def tilt_vectors(ca, mask=None):
 
 
 
-def local_tilt_angle(ca, k, mask=None):
+def local_tilt_angle(ca, ref_vec, mask=None):
 
 
-    k = types.k(k)
+    ref_vec = types.k(ref_vec)
 
 
     t_vec = tilt_vectors(ca, mask=mask)
 
 
-    cosine_of_local_tilt_angle = np.clip( dot(t_vec,k), -1.0, 1.0)
+    cosine_of_local_tilt_angle = np.clip( dot(t_vec,ref_vec), -1.0, 1.0)
 
     
     return np.arccos( cosine_of_local_tilt_angle )
@@ -251,10 +262,10 @@ def rotation_vectors(ca, mask=None):
 
 
 
-def local_rotation_angle( ca, k, mask=None ):
+def local_rotation_angle( ca, ref_vec, mask=None ):
 
 
-    k = types.k(k)
+    k = types.k(ref_vec)
 
     h = local_axes(ca, mask=mask)
 
@@ -368,9 +379,9 @@ def circular_mean(data,  axis=None):
 
 
 
-def rotation_angle(ca, k, turn_angle_deg, phase, mask=None, m=0, n=None):
+def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
-    rot_angle = local_rotation_angle( ca, k, mask=mask )
+    rot_angle = local_rotation_angle( ca, ref_vec, mask=mask )
 
     rot_angle_in_chosen_phase = single_phase(rot_angle, turn_angle_deg, phase)
 
@@ -415,8 +426,10 @@ def circular_var(data,  axis=None):
 
     data_in_complex_plane = np.exp(1j*data)
     
+    with catch_warnings():
+        simplefilter("ignore", category=RuntimeWarning)
 
-    mean_of_data_in_complex_plane = np.nanmean(data_in_complex_plane, axis=axis)
+        mean_of_data_in_complex_plane = np.nanmean(data_in_complex_plane, axis=axis)
 
 
     # circular variance
@@ -435,8 +448,10 @@ def circular_std(data,  axis=None):
 
     data_in_complex_plane = np.exp(1j*data)
 
-
-    mean_of_data_in_complex_plane = np.nanmean(data_in_complex_plane, axis=axis)
+    with catch_warnings():
+        simplefilter("ignore", category=RuntimeWarning)
+        
+        mean_of_data_in_complex_plane = np.nanmean(data_in_complex_plane, axis=axis)
 
 
 

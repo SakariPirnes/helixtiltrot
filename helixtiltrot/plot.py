@@ -13,9 +13,11 @@ def rotation(rot_angle,residues='all',ncols=3):
     
     rot_angle = types.array(rot_angle,'rot_angle')
     
+
+    if rot_angle.ndim ==1:
+        rot_angle = rot_angle.reshape(rot_angle.size,1)
   
     n_frame, n_res = rot_angle.shape
-    
     
     
     # Check residues argument
@@ -45,26 +47,12 @@ def rotation(rot_angle,residues='all',ncols=3):
     Rs = 1-circular_var(rot_angle, axis=0)
     
     
-    
     circ_std = circular_std(rot_angle, axis=0)
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
 
     rot_angle = rot_angle.T
-    
 
-
-    #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-    # Skip residues that are not helical
-    
-    helical =  ~np.isnan(Rs)
-    
-    helical = helical[residues]
-    
-    residues = residues[helical]
-
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    
     
     
     #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -74,7 +62,6 @@ def rotation(rot_angle,residues='all',ncols=3):
     
 
     nrows = int( (residues.size+ncols-1)/ncols )
-    
     # Create figure
     fig = plt.figure(figsize=(10*ncols,10*nrows))
     fig.tight_layout(pad=8, w_pad=4, h_pad=3.7)
