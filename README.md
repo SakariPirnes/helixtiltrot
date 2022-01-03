@@ -1,6 +1,6 @@
 # HelixTiltRot
 
-CaLculate axis, tilt angle, rotation angle and kink angle of helical structures, such as alpha-helix and beta-strand
+Calculate axis, tilt angle, rotation angle and kink angle of helical structures, such as alpha-helix and beta-strand
 
 ## Install
 
