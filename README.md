@@ -2,7 +2,7 @@
 
 Calculate axis, tilt angle, rotation angle and kink angle of helical structures, such as alpha-helix and beta-strand
 
-## Install
+## Getting started
 
 Create python3 environment:
 
@@ -23,4 +23,7 @@ Install HelixTiltRot:
     
 ## Documentation
 
-https://numpy.org/devdocs/user/quickstart.html
+The HelixTiltRot package uses mainly NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html and https://numpy.org/ for information about NumPy.
+
+
+(documentation coming soon)
