@@ -18,80 +18,29 @@ __all__ = ['load_ca_dssp','local_axes', 'axis', 'kink_angle','center_points','ti
 
 
 
-def load_ca_dssp(fname,top=None,residues='all'):
+def load_ca_dssp(fname,top=None):
     
-    #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-    # Load md.Trajectory object
     
+    # Load mdtraj.Trajectory object
     if top == None:
         traj = load(fname)
 
     else:
         traj = load(fname,top=top)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
     
+    # take only protein
+    prot_indexes = traj.topology.select('protein')
+    traj.atom_slice(prot_indexes, inplace=True)
     
-    #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-    # Calculate ca, and dssp arrays
-    
-    if residues == 'all':
         
-        # Using all residues from input file
-        
-        # Alpha carbon indexes
-        ca_indexes = traj.topology.select('name CA')
-        
-        # Alpha carbon coordinates
-        ca = traj.xyz[:,ca_indexes,:]
-        
-        # DSSP
-        dssp = compute_dssp(traj, simplified=False)
-        
-        
-        
-    
-    else:
-        
-        #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        # Error handling for residues argument.
-        # Lenght of residues should equal 2
-        
-        try:
-            residues_len = len(residues)
-            
-        except TypeError:
-            raise TypeError('\"residues\" argument should be array-like with lenght of 2. You supplied residues={}'.format(residues)) from None
-        
-        else:
+    # Alpha-carbon atom positions
+    ca_indexes = traj.topology.select('name CA')
+    ca = traj.xyz[:,ca_indexes,:].astype(np.float64)
 
-            if residues_len != 2:
-                raise ValueError('\"residues\" argument lenght should equal 2. You supplied object with lenght of {}.'.format(residues_len))
-            
-        #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        
-        
-        #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        first, last = residues
-        
-        # Using only residues between "first" and "last" including them.
-        
-
-        # Alpha carbon indexes
-        ca_indexes = traj.topology.select('name CA and resid {} to {}'.format(first, last))
-        
-
-        # Alpha carbon coordinates
-        ca = traj.xyz[:,ca_indexes,:]
-        
-
-
-        dssp = compute_dssp(traj, simplified=False )[:,first:last+1]
-        
     
-    
-    ca = ca.astype(np.float64)
-
+    # DSSP
+    dssp = compute_dssp(traj, simplified=False)
     
     return ca, dssp
 
