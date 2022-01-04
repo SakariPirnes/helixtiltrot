@@ -308,6 +308,32 @@ def single_phase(rot_angle, turn_angle_deg, phase):
 
 def circular_mean(data,  axis=None):
 
+    """
+
+    Compute the circular mean along the specified axis, ignoring NaNs.
+    
+    Returns the average of the array elements.  The average is taken over
+    the flattened array by default, otherwise over the specified axis.
+
+
+    Parameters
+    ----------
+    data : array_like
+        Array containing numbers whose circular mean is desired. If `data` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    axis : {int, tuple of int, None}, optional
+        Axis or axes along which the means are computed. The default is to compute
+        the mean of the flattened array.
+
+    Returns
+    -------
+    m : ndarray of `numpy.float64`s
+        Returns a new array containing the circular mean values.
+        Nan is returned for slices that contain only NaNs.
+
+
+    """
+
 
     data = types.array(data,'data')
 
@@ -343,6 +369,34 @@ def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
 def angle_diff(angles1, angles2):
 
+
+    """
+
+    Compute substraction between two broadcastable arrays containing angles
+    in radians.
+
+    Returns array of resulting difference angles in radians,
+    in the range ]-pi,pi]. 
+
+
+    Parameters
+    ----------
+    angles1 : array_like
+        Array containing angles in radians, should be broadcastable with `angles2`. 
+        If `angles1` is not an array of `numpy.float64`s,
+        a conversion is attempted.
+    angles2 : array_like
+        Array containing angles in radians, should be broadcastable with `angles1`. 
+        If `angles2` is not an array of `numpy.float64`s,
+        a conversion is attempted.
+
+    Returns
+    -------
+    m : ndarray of `numpy.float64`s
+        Returns a new array containing the difference angles.
+
+    """
+
     
     angles1 = types.array(angles1, 'angles1')
     angles2 = types.array(angles2, 'angles2')
@@ -364,6 +418,33 @@ def angle_diff(angles1, angles2):
 
 
 def circular_var(data,  axis=None):
+
+    """
+
+    Compute the circular variance along the specified axis, ignoring NaNs.
+    
+    Returns the variance of the array elements.  The variance is taken over
+    the flattened array by default, otherwise over the specified axis.
+    `float64` intermediate and return values are used for integer inputs.
+
+
+    Parameters
+    ----------
+    data : array_like
+        Array containing numbers whose circular variance is desired. If `data` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    axis : {int, tuple of int, None}, optional
+        Axis or axes along which the means are computed. The default is to compute
+        the mean of the flattened array.
+
+    Returns
+    -------
+    m : ndarray of `numpy.float64`s
+        Returns a new array containing the circular variance values.
+        Nan is returned for slices that contain only NaNs.
+
+
+    """
 
 
     data = types.array(data,'data')
@@ -389,6 +470,32 @@ def circular_var(data,  axis=None):
 
 def circular_std(data,  axis=None):
 
+    """
+
+    Compute the circular standard deviation along the specified axis, ignoring NaNs.
+    
+    Returns the standard deviation of the array elements.  The standard deviation is taken over
+    the flattened array by default, otherwise over the specified axis.
+    `float64` intermediate and return values are used for integer inputs.
+
+
+    Parameters
+    ----------
+    data : array_like
+        Array containing numbers whose circular standard deviation is desired. If `data` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    axis : {int, tuple of int, None}, optional
+        Axis or axes along which the means are computed. The default is to compute
+        the mean of the flattened array.
+
+    Returns
+    -------
+    m : ndarray of `numpy.float64`s
+        Returns a new array containing the circular standard deviation values.
+        Nan is returned for slices that contain only NaNs.
+
+
+    """
 
     data = types.array(data,'angles')
 
