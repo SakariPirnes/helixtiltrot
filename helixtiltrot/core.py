@@ -237,30 +237,50 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
 
 
 
-def single_phase(rot_angle, turn_angle_deg, phase):
+def single_phase(local_rot, turn_angle_deg, phase):
     
 
+    """
 
-    rot_angle = types.array(rot_angle, 'rot_angle')
+    Shift local rotation angles in radians into local rotation angles in phase
+    of residue `phase`, in radians .
+
+    Returns a new array of local rotation angles in phase of residue `phase`, 
+    in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    local_rot : array_like
+        Array containing local rotation angles. If `data` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    turn_angle_deg : float or int
+        The turn angle in degrees.
+    phase : int
+        Desired phase for `local_rot`
+
+    Returns
+    -------
+    m : ndarray of `numpy.float64`s
+        Returns a new array of local rotation angles in phase of residue `phase`, 
+        in radians, in range ]-pi,pi].
+
+
+    """
+
+    local_rot = types.array(local_rot, 'local_rot')
 
 
 
     # Numper of residues
-    n_res = rot_angle.shape[-1]
+    n_res = local_rot.shape[-1]
 
 
-    
-    
-    ## Chosen phase
-    #if phase=='mid':
-
-    #    # The phase from the residue in the middle is selected
-    #    phase = int((n_res)/2)
 
     if isinstance( phase, int) == False:
 
 
-        raise TypeError('\"phase\" argument should be int or \"mid\". You supplied {}'.format(type(phase)))
+        raise TypeError('\"phase\" argument should be int. You supplied {}'.format(type(phase)))
 
         
         
@@ -290,20 +310,20 @@ def single_phase(rot_angle, turn_angle_deg, phase):
         
     else:
 
-        raise TypeError('\"turn_angle_deg\" argument should be int or float. You supplied {}'.format(type(phase_step)))
+        raise TypeError('\"turn_angle_deg\" argument should be int or float. You supplied {}'.format(type(turn_angle_deg)))
     
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     
-    rot_angle_in_chosen_phase = rot_angle + phase_angles
+    local_rot_in_chosen_phase = local_rot + phase_angles
 
-    not_nan = ~np.isnan(rot_angle_in_chosen_phase)
-    rot_angle_in_chosen_phase[not_nan] =  np.pi - (( np.pi - rot_angle_in_chosen_phase[not_nan] ) % (2 * np.pi ))
-
-
+    not_nan = ~np.isnan(local_rot_in_chosen_phase)
+    local_rot_in_chosen_phase[not_nan] =  np.pi - (( np.pi - local_rot_in_chosen_phase[not_nan] ) % (2 * np.pi ))
 
 
-    return rot_angle_in_chosen_phase
+
+
+    return local_rot_in_chosen_phase
 
 
 def circular_mean(data,  axis=None):
@@ -356,12 +376,41 @@ def circular_mean(data,  axis=None):
 
 def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
-    rot_angle = local_rotation_angle( ca, ref_vec, mask=mask )
+    """
 
-    rot_angle_in_chosen_phase = single_phase(rot_angle, turn_angle_deg, phase)
+    Shift local rotation angles in radians into local rotation angles in phase
+    of residue `phase`, in radians .
+
+    Returns a new array of local rotation angles in phase of residue `phase`, 
+    in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    local_rot : array_like
+        Array containing local rotation angles. If `data` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    turn_angle_deg : float or int
+        The turn angle in degrees.
+    phase : int
+        Desired phase for `local_rot`
+
+    Returns
+    -------
+    rot : ndarray of `numpy.float64`s
+        Returns a new array of local rotation angles in phase of residue `phase`, 
+        in radians, in range ]-pi,pi].
 
 
-    return circular_mean(rot_angle_in_chosen_phase[:,m:n],  axis=1)
+    """
+
+
+    local_rot = local_rotation_angle( ca, ref_vec, mask=mask )
+
+    rot = single_phase(local_rot, turn_angle_deg, phase)
+
+
+    return circular_mean(rot[:,m:n],  axis=1)
 
 
  
