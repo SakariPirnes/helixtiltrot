@@ -106,8 +106,10 @@ def local_axes(ca, mask=None):
     return normalize( h )
 
 
-def axis(ca, mask=None, m=0, n=None):
 
+
+def axis(ca, mask=None, m=0, n=None):
+    
     ca  = types.ca(ca,'ca').copy()
 
     if mask is not None:
@@ -129,6 +131,8 @@ def axis(ca, mask=None, m=0, n=None):
 
 def kink_angle(ca, m1, n1, n2, m2, mask=None):
 
+    
+
     H1 = axis(ca, mask=mask, m=m1, n=n1)
     H2 = axis(ca, mask=mask, m=m2, n=n2)
 
@@ -138,7 +142,44 @@ def kink_angle(ca, m1, n1, n2, m2, mask=None):
 
 
 
+
+
 def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
+
+
+    """
+
+    Compute the local tilt angles from alpha-carbon coordinates, relative
+    to a chosen reference vector.
+
+    Returns a new 1-D array of the local tilt angles in phase of residue
+    `phase`, in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    ref_vec : Array_like
+        1-D array containing the Cartesian coordinates of the reference
+        vector. Hence, the shape of `ref_vec` is (3,). If `ref_vec` is not
+        an array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    local_tilt : ndarray of `numpy.float64`s
+        Returns a new 1-D array of tilt angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `local_tilt` is (nf,nr).
+
+    """
 
     H_mn = axis(ca, mask=mask, m=m, n=n)
     ref_vec = types.k(ref_vec)
@@ -161,6 +202,34 @@ def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
 def tilt_vectors(ca, mask=None):
 
 
+    """
+
+    Compute the tilt vectors from alpha-carbon coordinates.
+
+    Returns a new 3-D array of (normalized) tilt vectors.
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    tilt_vec : ndarray of `numpy.float64`s
+        Returns a new 3-D array of (normalized) rotation vectors. 
+        The `tilt_vec` has the same shape as `ca`.
+
+    """
+
     h = local_axes(ca, mask=mask)
 
 
@@ -171,6 +240,42 @@ def tilt_vectors(ca, mask=None):
 
 
 def local_tilt_angle(ca, ref_vec, mask=None):
+
+    """
+
+    Compute the local tilt angles from alpha-carbon coordinates, relative
+    to a chosen reference vector.
+
+    Returns a new 2-D array of local tilt angles in phase of residue `phase`, 
+    in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    ref_vec : Array_like
+        1-D array containing the Cartesian coordinates of the reference
+        vector. Hence, the shape of `ref_vec` is (3,). If `ref_vec` is not
+        an array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    local_tilt : ndarray of `numpy.float64`s
+        Returns a new 2-D array of the local tilt angles in phase of residue
+        `phase`, in radians, in range ]-pi,pi]. The shape of `local_tilt` 
+        is (nf,nr).
+
+    """
+
 
 
     ref_vec = types.k(ref_vec)
@@ -189,6 +294,33 @@ def local_tilt_angle(ca, ref_vec, mask=None):
 
 def center_points(ca, mask=None):
 
+    """
+
+    Compute the center points of local segments from
+    alpha-carbon coordinates.
+
+    Returns a new 3-D array of the center point.
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    center_points : ndarray of `numpy.float64`s
+        Returns a new 3-D array of the center points. 
+
+    """
 
     h = local_axes(ca, mask=mask)
 
@@ -201,6 +333,33 @@ def center_points(ca, mask=None):
 
 def rotation_vectors(ca, mask=None):
 
+    """
+
+    Compute the rotation vectors from alpha-carbon coordinates.
+
+    Returns a new 3-D array of (normalized) rotation vectors.
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    rot_vec : ndarray of `numpy.float64`s
+        Returns a new 3-D array of (normalized) rotation vectors. 
+        The `rot_vec` has the same shape as `ca`.
+
+    """
 
     h = local_axes(ca, mask=mask)
 
@@ -212,6 +371,42 @@ def rotation_vectors(ca, mask=None):
 
 
 def local_rotation_angle( ca, ref_vec, mask=None ):
+
+
+    """
+
+    Compute the local rotation angles from alpha-carbon coordinates, relative
+    to chosen reference vector.
+
+    Returns a new 1-D array of the local rotation angles in phase of residue
+    `phase`, in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    ref_vec : Array_like
+        1-D array containing the Cartesian coordinates of the reference
+        vector. Hence, the shape of `ref_vec` is (3,). If `ref_vec` is not
+        an array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    local_rot : ndarray of `numpy.float64`s
+        Returns a new 1-D array of rotation angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `local_rot` is (nf,nr).
+
+    """
+
 
 
     k = types.k(ref_vec)
@@ -252,7 +447,7 @@ def single_phase(local_rot, turn_angle_deg, phase):
     Parameters
     ----------
     local_rot : array_like
-        Array containing local rotation angles. If `data` is not an
+        Array containing local rotation angles. If `local_rot` is not an
         array of `numpy.float64`s, a conversion is attempted.
     turn_angle_deg : float or int
         The turn angle in degrees.
@@ -261,7 +456,7 @@ def single_phase(local_rot, turn_angle_deg, phase):
 
     Returns
     -------
-    m : ndarray of `numpy.float64`s
+    local_rot_phase : ndarray of `numpy.float64`s
         Returns a new array of local rotation angles in phase of residue `phase`, 
         in radians, in range ]-pi,pi].
 
@@ -326,6 +521,8 @@ def single_phase(local_rot, turn_angle_deg, phase):
     return local_rot_in_chosen_phase
 
 
+
+
 def circular_mean(data,  axis=None):
 
     """
@@ -347,10 +544,9 @@ def circular_mean(data,  axis=None):
 
     Returns
     -------
-    m : ndarray of `numpy.float64`s
+    circ_mean : ndarray of `numpy.float64`s
         Returns a new array containing the circular mean values.
         Nan is returned for slices that contain only NaNs.
-
 
     """
 
@@ -378,29 +574,38 @@ def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
     """
 
-    Shift local rotation angles in radians into local rotation angles in phase
-    of residue `phase`, in radians .
+    Compute rotation angle from alpha-carbon coordinates.
 
-    Returns a new array of local rotation angles in phase of residue `phase`, 
+    Returns a new 1-D array of rotation angles in phase of residue `phase`, 
     in radians, in range ]-pi,pi].
     
 
     Parameters
     ----------
-    local_rot : array_like
-        Array containing local rotation angles. If `data` is not an
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
+    ref_vec : Array_like
+        1-D Array containing the Cartesian coordinates of the reference
+        vector. Hence, the shape of `ref_vec` is (3,). If `ref_vec` is not
+        an array of `numpy.float64`s, a conversion is attempted.
     turn_angle_deg : float or int
         The turn angle in degrees.
     phase : int
-        Desired phase for `local_rot`
+        Desired phase for `local_rot`.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
 
     Returns
     -------
     rot : ndarray of `numpy.float64`s
-        Returns a new array of local rotation angles in phase of residue `phase`, 
-        in radians, in range ]-pi,pi].
-
+        Returns a new 1-D array of rotation angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `rot` is (nf,).
 
     """
 
@@ -441,7 +646,7 @@ def angle_diff(angles1, angles2):
 
     Returns
     -------
-    m : ndarray of `numpy.float64`s
+    diff : ndarray of `numpy.float64`s
         Returns a new array containing the difference angles.
 
     """
@@ -488,10 +693,9 @@ def circular_var(data,  axis=None):
 
     Returns
     -------
-    m : ndarray of `numpy.float64`s
+    circ_var : ndarray of `numpy.float64`s
         Returns a new array containing the circular variance values.
         Nan is returned for slices that contain only NaNs.
-
 
     """
 
@@ -517,6 +721,7 @@ def circular_var(data,  axis=None):
 
 
 
+
 def circular_std(data,  axis=None):
 
     """
@@ -525,7 +730,6 @@ def circular_std(data,  axis=None):
     
     Returns the standard deviation of the array elements.  The standard deviation is taken over
     the flattened array by default, otherwise over the specified axis.
-    `float64` intermediate and return values are used for integer inputs.
 
 
     Parameters
@@ -539,7 +743,7 @@ def circular_std(data,  axis=None):
 
     Returns
     -------
-    m : ndarray of `numpy.float64`s
+    circ_std : ndarray of `numpy.float64`s
         Returns a new array containing the circular standard deviation values.
         Nan is returned for slices that contain only NaNs.
 
