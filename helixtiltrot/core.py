@@ -49,6 +49,34 @@ def load_ca_dssp(fname,top=None):
 
 def sse_mask(dssp, sse = 'H'):
 
+    """
+
+    Compute the axis from alpha-carbon coordinates of helical structure.
+
+    Returns a new 3-D array of the local axes for each frame.
+    The shape of `h` is (nf,nr-3,3).
+
+
+    Parameters
+    ----------
+    dssp : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+
+    Returns
+    -------
+    sse_mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    """
+
+
+
     dssp = types.dssp(dssp, 'dssp')
     sse = types.sse(sse,'sse')
 
@@ -67,6 +95,35 @@ def sse_mask(dssp, sse = 'H'):
 
 
 def local_axes(ca, mask=None):
+
+    """
+
+    Compute the axis from alpha-carbon coordinates of helical structure.
+
+    Returns a new 3-D array of the local axes for each frame.
+    The shape of `h` is (nf,nr-3,3).
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    h : ndarray of `numpy.float64`s
+        Returns a new 3-D array of the local axes for each frame.
+        The shape of `h` is (nf,nr-3,3).
+
+    """
 
 
     ca  = types.ca(ca,'ca').copy()
@@ -110,6 +167,35 @@ def local_axes(ca, mask=None):
 
 def axis(ca, mask=None, m=0, n=None):
     
+    """
+
+    Compute the axis from alpha-carbon coordinates of helical structure.
+
+    Returns a new 2-D array of the axis `H` for each frame.
+    The shape of `H` is (nf,3).
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    H : ndarray of `numpy.float64`s
+        Returns a new 2-D array of the axis `H` for each frame.
+        The shape of `H` is (nf,3).
+
+    """
+
     ca  = types.ca(ca,'ca').copy()
 
     if mask is not None:
@@ -131,7 +217,38 @@ def axis(ca, mask=None, m=0, n=None):
 
 def kink_angle(ca, m1, n1, n2, m2, mask=None):
 
-    
+
+    """
+
+    Compute the kink angle from alpha-carbon coordinates.
+
+    Returns a new 1-D array of the local tilt angles in phase of residue
+    `phase`, in radians, in range ]-pi,pi].
+
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        represents. the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    kink : ndarray of `numpy.float64`s
+        Returns a new 1-D array of tilt angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `kink` is (nf,).
+
+    """
+
+
+
 
     H1 = axis(ca, mask=mask, m=m1, n=n1)
     H2 = axis(ca, mask=mask, m=m2, n=n2)
