@@ -56,9 +56,49 @@ The function 13 `helixtiltrot.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.
 The rotation angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
 
 
-Plotting how quantities have evolve in time in given coordinate file is a common starting point for an analysis. The HelixTiltRot contains a module `plot` containing three functions:\
+Plotting how quantities have evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixtiltrot.local_tilt_angle` and `helixtiltrot.local_rotation_angle` the HelixTiltRot has a module `plot` containing three functions:\
   18. `helixtiltrot.plot.rotation` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
   19. `helixtiltrot.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
   20. `helixtiltrot.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)
 
 
+The documentation of these 20 function can be found from their docstrings. For example to see the documentation of `helixtiltrot.local_rotation_angle`:
+```
+>>> 
+>>> import helixtiltrot
+>>> print(helixtiltrot.local_rotation_angle.__doc__)
+
+
+    Compute the local rotation angles from alpha-carbon coordinates, relative
+    to chosen reference vector.
+
+    Returns a new 1-D array of the local rotation angles in phase of residue
+    `phase`, in radians, in range ]-pi,pi].
+    
+
+    Parameters
+    ----------
+    ca : array_like
+        Array containing the Cartesian coordinates of alpha-carbon atoms.
+        The shape of `ca` is (nf,nr,3), where nf is the number of frames,
+        nr is the number of residues and the 3 values in the last axis
+        ate the Cartesian coordinates. If `ca` is not an
+        array of `numpy.float64`s, a conversion is attempted.
+    ref_vec : Array_like
+        1-D array containing the Cartesian coordinates of the reference
+        vector. Hence, the shape of `ref_vec` is (3,). If `ref_vec` is not
+        an array of `numpy.float64`s, a conversion is attempted.
+    mask : array_like or None, optional
+        numpy mask with shape (nf,nr). Mask determines which `ca` atoms
+        will be used. Default is None, which is equivalent
+        to numpy.full((nf,nr), True), i.e. all `ca` atoms will be used.
+
+    Returns
+    -------
+    local_rot : ndarray of `numpy.float64`s
+        Returns a new 1-D array of rotation angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `local_rot` is (nf,nr).
+
+    
+>>>
+```
