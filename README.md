@@ -82,7 +82,7 @@ The documentation of these 20 function can be found from their docstrings. For e
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     ref_vec : Array_like
         1-D array containing the Cartesian coordinates of the reference
