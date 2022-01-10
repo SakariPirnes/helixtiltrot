@@ -27,7 +27,7 @@ Install HelixTiltRot:
     
 ## Documentation
 
-> **_NOTE:_** The HelixTiltRot package uses mainly NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html and https://numpy.org/ for information about NumPy.
+> **_NOTE:_** The HelixTiltRot package mainly uses NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html and https://numpy.org/ for information about NumPy.
 
 
 The following functions are availible in HelixTiltRot:
@@ -49,6 +49,16 @@ The following functions are availible in HelixTiltRot:
 16. `helixtiltrot.circular_var` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
 17. `helixtiltrot.circular_std` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
 
-Detailed definitions of the functions 1.-12. are found in [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
+Detailed definitions of the functions 1-12 are found in [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
 
-The function 13. `helixtiltrot.load_ca_dssp` uses `mdtraj.load` and [`mdtraj.compute_dssp`](https://www.mdtraj.org/1.9.8.dev0/api/generated/mdtraj.compute_dssp.html?highlight=dssp#mdtraj.compute_dssp) to obtain alpha-carbon coordinates and DSSP assigment codes from given coordinate files. See https://www.mdtraj.org for more information about the MDTraj python library and for supported file formats, including pdb, xtc, trr, dcd, binpos, netcdf, mdcrd, prmtop.
+The function 13 `helixtiltrot.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.org/1.9.4/api/generated/mdtraj.load.html?highlight=load#mdtraj.load), [`mdtraj.Trajectory`](https://mdtraj.org/1.9.4/api/generated/mdtraj.Trajectory.html?highlight=trajectory#mdtraj.Trajectory) and [`mdtraj.compute_dssp`](https://mdtraj.org/1.9.4/api/generated/mdtraj.compute_dssp.html?highlight=dssp#mdtraj.compute_dssp) to obtain alpha-carbon coordinates and DSSP assigment codes from given coordinate files. See https://mdtraj.org/1.9.4/index.html for more information about the MDTraj python library and for supported file formats, including pdb, xtc, trr, dcd, binpos, netcdf, mdcrd, prmtop.
+
+The rotation angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
+
+
+Plotting how quantities have evolve in time in given coordinate file is a common starting point for an analysis. The HelixTiltRot contains a module `plot` containing three functions:\
+  18. `helixtiltrot.plot.rotation` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
+  19. `helixtiltrot.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
+  20. `helixtiltrot.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)
+
+
