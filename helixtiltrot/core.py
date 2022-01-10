@@ -148,7 +148,7 @@ def local_axes(ca, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -219,7 +219,7 @@ def axis(ca, mask=None, m=0, n=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -276,7 +276,7 @@ def kink_angle(ca, m1, n1, m2, n2, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -333,7 +333,7 @@ def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     ref_vec : Array_like
         1-D array containing the Cartesian coordinates of the reference
@@ -391,7 +391,7 @@ def tilt_vectors(ca, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -432,7 +432,7 @@ def local_tilt_angle(ca, ref_vec, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     ref_vec : Array_like
         1-D array containing the Cartesian coordinates of the reference
@@ -484,7 +484,7 @@ def center_points(ca, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -522,7 +522,7 @@ def rotation_vectors(ca, mask=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
@@ -564,7 +564,7 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        ate the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     ref_vec : Array_like
         1-D array containing the Cartesian coordinates of the reference
@@ -763,7 +763,7 @@ def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
         Array containing the Cartesian coordinates of alpha-carbon atoms.
         The shape of `ca` is (nf,nr,3), where nf is the number of frames,
         nr is the number of residues and the 3 values in the last axis
-        represents. the Cartesian coordinates. If `ca` is not an
+        are the Cartesian coordinates. If `ca` is not an
         array of `numpy.float64`s, a conversion is attempted.
     ref_vec : Array_like
         1-D Array containing the Cartesian coordinates of the reference
@@ -808,6 +808,7 @@ def angle_diff(angles1, angles2):
 
 
     """
+
 
     Compute substraction between two broadcastable arrays containing angles
     in radians.
