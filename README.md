@@ -102,3 +102,5 @@ The documentation of these 20 function can be found from their docstrings. For e
     
 >>>
 ```
+### Examples
+To get an idea how the 20 functions provided in HelixTiltRot can be used, two example analysis done with HelixTiltRot can be found from chapter 4 of [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf). The python scripts to produce the figures in the two examples can be found from folders [Example1](https://github.com/SakariPirnes/helixtiltrot/tree/main/Examples/Example1) and [Example2](https://github.com/SakariPirnes/helixtiltrot/tree/main/Examples/Example1).
