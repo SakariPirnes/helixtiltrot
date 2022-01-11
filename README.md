@@ -27,7 +27,7 @@ Install HelixTiltRot:
     
 ## Documentation
 
-> **_NOTE:_** The HelixTiltRot package mainly uses NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html and https://numpy.org/ for more information about NumPy.
+> **_NOTE:_** The HelixTiltRot package mainly uses NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html for quickstart and https://numpy.org/ for more information about NumPy.
 
 
 The following functions are availible in HelixTiltRot:
