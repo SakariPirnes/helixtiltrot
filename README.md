@@ -2,9 +2,8 @@
 
 A python implementation of the method constructed in BSc thesis:
 
-[Analytical method for tilt and rotation of
-α-helix and β-strand like secondary
-structures](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
+[Analytical method for calculating
+geometrical metrics for protein structures](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
 
 ## Installation
 
