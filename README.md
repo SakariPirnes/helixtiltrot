@@ -48,7 +48,7 @@ The following functions are availible in HelixTiltRot:
 16. `helixtiltrot.circular_var` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
 17. `helixtiltrot.circular_std` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
 
-Detailed definitions of the functions 1-12 are found in [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
+Detailed definitions of the functions 1-12 are in [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
 
 The function 13 `helixtiltrot.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.org/1.9.4/api/generated/mdtraj.load.html?highlight=load#mdtraj.load), [`mdtraj.Trajectory`](https://mdtraj.org/1.9.4/api/generated/mdtraj.Trajectory.html?highlight=trajectory#mdtraj.Trajectory) and [`mdtraj.compute_dssp`](https://mdtraj.org/1.9.4/api/generated/mdtraj.compute_dssp.html?highlight=dssp#mdtraj.compute_dssp) to obtain alpha-carbon coordinates and DSSP assigment codes from given coordinate files. See https://mdtraj.org/1.9.4/index.html for more information about the MDTraj python library and for supported file formats, including pdb, xtc, trr, dcd, binpos, netcdf, mdcrd, prmtop.
 
