@@ -55,7 +55,7 @@ The function 13 `helixtiltrot.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.
 The rotation angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
 
 
-Plotting how quantities have evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixtiltrot.local_tilt_angle` and `helixtiltrot.local_rotation_angle` the HelixTiltRot has a module `plot` containing three functions:\
+Plotting how quantities evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixtiltrot.local_tilt_angle` and `helixtiltrot.local_rotation_angle` the HelixTiltRot has a module `plot` containing three functions:\
   18. `helixtiltrot.plot.rotation` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
   19. `helixtiltrot.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
   20. `helixtiltrot.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)
