@@ -61,7 +61,7 @@ Plotting how quantities evolve in time in given coordinate file is a common star
   20. `helixtiltrot.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)
 
 
-The documentation of these 20 function can be found from their docstrings. For example to see the documentation of `helixtiltrot.local_rotation_angle`:
+The documentation of these 20 functions can be found from their docstrings. For example to see the documentation of `helixtiltrot.local_rotation_angle`:
 ```
 >>> 
 >>> import helixtiltrot
