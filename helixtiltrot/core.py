@@ -187,17 +187,25 @@ def local_axes(ca, mask=None):
     r32 = normalize(r3-r2)
     r43 = normalize(r4-r3)
     
+
     # Vectors of plane which normal is the local axis
-    #s1 = 2 * r2 - r1 - r3
-    #s2 = 2 * r3 - r2 - r4
-    s1 = r21 - r32
-    s2 = r32 - r43
+    s1 = normalize(r21 - r32)
+    s2 = normalize(r32 - r43)
         
         
-    # Local axes
+    # (unnormalized) APPROXb
     h = np.cross( s2, s1 )
-        
-    # return normalized local axes
+
+
+    # mask for APPROXc's condition
+    mc = dot(s1,s1) < -0.9
+
+
+    # update APPROXb to APPROXc
+    h[mc] = (r4-r2+r3-r1)[mc]
+
+
+    # return APPROXc of local axes
     return normalize( h )
 
 
