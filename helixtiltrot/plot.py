@@ -10,6 +10,13 @@ __all__ = [ 'rotation', "angle_map","angle_density" ]
 
 
 def rotation(rot_angle,residues='all',ncols=3):
+
+    """
+
+    nice plott
+
+
+    """
     
     rot_angle = types.array(rot_angle,'rot_angle')
     

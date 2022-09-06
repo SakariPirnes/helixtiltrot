@@ -1,10 +1,8 @@
 
-# Import the core of the tool
+# Import the core of the tool and the plotting functions
 from . import core
 from .core import *
 
-
-# Import plotting functions
 from . import plot
 from .plot import *
 

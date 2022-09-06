@@ -369,10 +369,8 @@ def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
     ref_vec = types.k(ref_vec)
 
 
-    # we change H_mn to [H_mn] since the dot function is dumm
-    H_mn = H_mn.reshape(1,*H_mn.shape)
 
-    cosine_of_tilt_angle = np.clip( dot(H_mn,ref_vec), -1.0, 1.0)[0]
+    cosine_of_tilt_angle = np.clip( (H_mn*ref_vec).sum(axis=1), -1.0, 1.0)
 
     return np.arccos( cosine_of_tilt_angle )
 
