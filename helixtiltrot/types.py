@@ -45,10 +45,10 @@ def boolean(arg,arg_name):
 
 
 
-def equal_shape(arg1,arg1_name, arg2,arg2_name, axes_to_equal ):
+def equal_shape(shape1,arg1_name, shape2,arg2_name, axes_to_equal,  words = ['frames', 'residues', 'cartesian coordinates']):
 
-    shape1 = arg1.shape
-    shape2 = arg2.shape
+    #shape1 = arg1.shape
+    #shape2 = arg2.shape
 
     if shape1 != shape2:
 
@@ -59,7 +59,6 @@ def equal_shape(arg1,arg1_name, arg2,arg2_name, axes_to_equal ):
             
         else:
 
-            words = ['frames', 'residues', 'cartesian coordinates']
 
             for axis in axes_to_equal:
                 if shape1[axis] != shape2[axis]:
@@ -181,7 +180,7 @@ xyzbase = {
 
 
 
-def k(arg, arg_name='k'):
+def k(arg, data_shape, arg_name='ref_vec'):
     
 
 
@@ -203,11 +202,23 @@ def k(arg, arg_name='k'):
         
         ndim = arg.ndim
         
-        if ndim != 1:
+        if ndim != 1 and ndim != 3 and ndim != 2:
             
-            raise ValueError('\"{}\" argument should have only one axis. You supplied {} axises.'.format(arg_name,ndim))
+            raise ValueError('\"{}\" argument should have either 1, 2 or 3 axes. You supplied {} axises.'.format(arg_name,ndim))
+
+        elif ndim == 3 and len(data_shape) == 2:
+            raise ValueError('\"{}\" argument should have either 1 or 2  axes. You supplied {} axises.'.format(arg_name,ndim))
+        elif ndim == 2 and len(data_shape) == 3:
+
+            arg_reshaped = np.empty((arg.shape[0], data_shape[1], arg.shape[1]))
+
+            for i in range(data_shape[1]):
+                arg_reshaped[:,i] = arg
+
+            arg = arg_reshaped
+            ndim+=1
             
-        else:
+        if ndim == 1:
             
             # Making sure we are in the boring 3d world.
             
@@ -224,12 +235,36 @@ def k(arg, arg_name='k'):
                 
                 if arg_lenght == 0:
                     
-                    raise ValueError('Null vector is not valid for \"{}\" argument.'.format(arg_name))
+                    raise ValueError('Vector with length 0 is not valid for \"{}\" argument.'.format(arg_name))
                 
                 else:
                     
                     # Normalize
                     arg = arg/arg_lenght
+
+
+        elif ndim == 3:
+            equal_shape(arg.shape, arg_name, data_shape,'ca', 'all')
+
+            arg_lenght = (arg[:,:,0]**2+arg[:,:,1]**2+arg[:,:,2]**2)**0.5
+
+            if np.any(arg_lenght==0):
+                raise ValueError('Array containing a vector with length 0 is not valid for \"{}\" argument.'.format(arg_name))
+            else:
+                arg = (arg.T/arg_lenght.T).T
+        elif ndim == 2:
+
+            words = ['frames', 'cartesian coordinates']
+            equal_shape(arg.shape, arg_name, data_shape,'axis', [0,1], words=words)
+
+            arg_lenght = (arg[:,0]**2+arg[:,1]**2+arg[:,2]**2)**0.5
+
+            if np.any(arg_lenght==0):
+                raise ValueError('Array containing a vector with length 0 is not valid for \"{}\" argument.'.format(arg_name))
+            else:
+                arg = (arg.T/arg_lenght.T).T
+
+
         
     return arg
 

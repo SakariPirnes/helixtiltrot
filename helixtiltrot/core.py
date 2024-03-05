@@ -15,11 +15,6 @@ __all__ = ['load_ca_dssp','local_axes', 'axis', 'kink_angle','center_points','ti
 
 
 
-
-
-
-
-
 def load_ca_dssp(fname,top=None):
     
 
@@ -170,7 +165,7 @@ def local_axes(ca, mask=None):
     if mask is not None:
 
         mask = types.array(mask.copy(),'mask', dtype = bool)
-        types.equal_shape(ca,'ca', mask, 'mask', axes_to_equal=[0,1] )
+        types.equal_shape(ca.shape,'ca', mask.shape, 'mask', axes_to_equal=[0,1] )
 
         ca[~mask] = np.nan
 
@@ -252,7 +247,7 @@ def axis(ca, mask=None, m=0, n=None):
     if mask is not None:
 
         mask = types.array(mask.copy(),'mask', dtype = bool)
-        types.equal_shape(ca,'ca', mask, 'mask', axes_to_equal=[0,1] )
+        types.equal_shape(ca.shape,'ca', mask.shape, 'mask', axes_to_equal=[0,1] )
 
         h = local_axes(ca[:,m:n], mask=mask[:,m:n])
     else:
@@ -366,7 +361,7 @@ def tilt_angle(ca, ref_vec, mask=None, m=0, n=None):
     """
 
     H_mn = axis(ca, mask=mask, m=m, n=n)
-    ref_vec = types.k(ref_vec)
+    ref_vec = types.k(ref_vec, H_mn.shape)
 
 
 
@@ -460,10 +455,11 @@ def local_tilt_angle(ca, ref_vec, mask=None):
 
 
 
-    ref_vec = types.k(ref_vec)
 
 
     t_vec = tilt_vectors(ca, mask=mask)
+
+    ref_vec = types.k(ref_vec, ca.shape)
 
 
     cosine_of_local_tilt_angle = np.clip( dot(t_vec,ref_vec), -1.0, 1.0)
@@ -591,9 +587,10 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
 
 
 
-    k = types.k(ref_vec)
 
     h = local_axes(ca, mask=mask)
+
+    k = types.k(ref_vec, ca.shape)
 
 
 
@@ -845,7 +842,7 @@ def angle_diff(angles1, angles2):
     angles1 = types.array(angles1, 'angles1')
     angles2 = types.array(angles2, 'angles2')
 
-    #types.equal_shape(angles1,'angles1', angles2, 'angles2', axes_to_equal='all' )
+    #types.equal_shape(angles1.shape,'angles1', angles2.shape, 'angles2', axes_to_equal='all' )
 
 
 
