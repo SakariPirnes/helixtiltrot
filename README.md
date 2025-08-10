@@ -1,4 +1,4 @@
-# HelixTiltRot
+# HelixSide
 
 A python implementation of the method constructed in BSc thesis:
 
@@ -19,17 +19,17 @@ Install dependencies using requirements.txt:
 
     pip install -r requirements.txt
 
-Install HelixTiltRot:
+Install HelixSide:
 
     pip install -e .
     
     
 ## Documentation
 
-> **_NOTE:_** The HelixTiltRot package mainly uses NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html for quickstart and https://numpy.org/ for more information about NumPy.
+> **_NOTE:_** The HelixSide package mainly uses NumPy arrays as inputs and outputs, see https://numpy.org/devdocs/user/quickstart.html for quickstart and https://numpy.org/ for more information about NumPy.
 
 
-The following functions are availible in HelixTiltRot:
+The following functions are availible in HelixSide:
 1. `helixside.local_axes` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.15)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
 2. `helixside.axis` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.2)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
 3. `helixside.tilt_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.1)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
@@ -55,7 +55,7 @@ The function 13 `helixside.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.org
 The side angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
 
 
-Plotting how quantities evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixside.local_tilt_angle` and `helixside.local_side_angle` the HelixTiltRot has a module `plot` containing three functions:\
+Plotting how quantities evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixside.local_tilt_angle` and `helixside.local_side_angle` the HelixSide has a module `plot` containing three functions:\
   18. `helixside.plot.polar` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)\
   19. `helixside.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)\
   20. `helixside.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)
@@ -102,4 +102,4 @@ The documentation of these 20 functions can be found from their docstrings. For 
 >>>
 ```
 ### Examples
-To get an idea how the 20 functions provided in HelixTiltRot can be used, two example analysis done with HelixTiltRot can be found from chapter 4 of [the BSc thesis](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf). The python scripts to produce the figures of these two examples can be found from folders [Example1](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1) and [Example2](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1).
+To get an idea how the 20 functions provided in HelixSide can be used, two example analysis done with HelixSide can be found from chapter 4 of [the BSc thesis](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf). The python scripts to produce the figures of these two examples can be found from folders [Example1](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1) and [Example2](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1).
