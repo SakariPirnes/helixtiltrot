@@ -1,4 +1,4 @@
-import helixtiltrot as htr
+import helixside
 
 
 # input coordinate files
@@ -7,14 +7,14 @@ xtc = 'transmembrane-alpha-helix.xtc'
 
 
 
-ca, dssp = htr.load_ca_dssp(xtc, top=pdb)
+ca, dssp = helixside.load_ca_dssp(xtc, top=pdb)
 
 
 
 # create numpy mask called sse_mask, such that
 # sse_mask[n,i] == True if the residue i at time step n
 # is either alpha-helix (H), pi-helix (I) or 310-helix
-sse_mask = htr.sse_mask(dssp, sse='HIG')
+sse_mask = helixside.sse_mask(dssp, sse='HIG')
 
 
 
@@ -23,14 +23,14 @@ k = [0,0,1]
 
 
 
-local_side = htr.local_side_angle(ca, ref_vec=k, mask=sse_mask)
+local_side = helixside.local_side_angle(ca, ref_vec=k, mask=sse_mask)
 
 
 # Change local side angles into phase of residue 10
-local_side_10 = htr.single_phase(local_side,phase=10, turn_angle_deg=100.1 )
+local_side_10 = helixside.single_phase(local_side,phase=10, turn_angle_deg=100.1 )
 
 
-fig, ax, cb = htr.plot.angle_map(local_side_10)
+fig, ax, cb = helixside.plot.angle_map(local_side_10)
 
 
 

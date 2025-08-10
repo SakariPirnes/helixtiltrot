@@ -30,48 +30,48 @@ Install HelixTiltRot:
 
 
 The following functions are availible in HelixTiltRot:
-1. `helixtiltrot.local_axes` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.15)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-2. `helixtiltrot.axis` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.2)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-3. `helixtiltrot.tilt_angle` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.1)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-4. `helixtiltrot.kink_angle` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.3)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-5. `helixtiltrot.tilt_vectors` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.4)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-6. `helixtiltrot.local_tilt_angle` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.5)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-7. `helixtiltrot.center_points` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - subsubsection [Center of the local segment](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-8. `helixtiltrot.rotation_vectors` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.18)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-9. `helixtiltrot.local_rotation_angle` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.29)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-10. `helixtiltrot.single_phase` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.19)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-11. `helixtiltrot.rotation_angle` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.20)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-12. `helixtiltrot.angle_diff` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py) - equation [(3.21)](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf)
-13. `helixtiltrot.load_ca_dssp` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
-14. `helixtiltrot.sse_mask` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
-15. `helixtiltrot.circular_mean` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
-16. `helixtiltrot.circular_var` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
-17. `helixtiltrot.circular_std` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/core.py)
+1. `helixside.local_axes` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.15)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+2. `helixside.axis` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.2)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+3. `helixside.tilt_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.1)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+4. `helixside.kink_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.3)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+5. `helixside.tilt_vectors` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.4)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+6. `helixside.local_tilt_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.5)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+7. `helixside.center_points` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - subsubsection [Center of the local segment](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+8. `helixside.side_vectors` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.18)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+9. `helixside.local_side_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.29)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+10. `helixside.single_phase` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.19)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+11. `helixside.side_angle` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.20)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+12. `helixside.angle_diff` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py) - equation [(3.21)](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf)
+13. `helixside.load_ca_dssp` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py)
+14. `helixside.sse_mask` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py)
+15. `helixside.circular_mean` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py)
+16. `helixside.circular_var` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py)
+17. `helixside.circular_std` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/core.py)
 
-Detailed definitions of the functions 1-12 are in [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
+Detailed definitions of the functions 1-12 are in [the BSc thesis](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf).
 
-The function 13 `helixtiltrot.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.org/1.9.4/api/generated/mdtraj.load.html?highlight=load#mdtraj.load), [`mdtraj.Trajectory`](https://mdtraj.org/1.9.4/api/generated/mdtraj.Trajectory.html?highlight=trajectory#mdtraj.Trajectory) and [`mdtraj.compute_dssp`](https://mdtraj.org/1.9.4/api/generated/mdtraj.compute_dssp.html?highlight=dssp#mdtraj.compute_dssp) to obtain alpha-carbon coordinates and DSSP assigment codes from given coordinate files. See https://mdtraj.org/1.9.4/index.html for more information about the MDTraj python library and for supported file formats, including pdb, xtc, trr, dcd, binpos, netcdf, mdcrd, prmtop.
+The function 13 `helixside.load_ca_dssp` uses [`mdtraj.load`](https://mdtraj.org/1.9.4/api/generated/mdtraj.load.html?highlight=load#mdtraj.load), [`mdtraj.Trajectory`](https://mdtraj.org/1.9.4/api/generated/mdtraj.Trajectory.html?highlight=trajectory#mdtraj.Trajectory) and [`mdtraj.compute_dssp`](https://mdtraj.org/1.9.4/api/generated/mdtraj.compute_dssp.html?highlight=dssp#mdtraj.compute_dssp) to obtain alpha-carbon coordinates and DSSP assigment codes from given coordinate files. See https://mdtraj.org/1.9.4/index.html for more information about the MDTraj python library and for supported file formats, including pdb, xtc, trr, dcd, binpos, netcdf, mdcrd, prmtop.
 
-The rotation angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
-
-
-Plotting how quantities evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixtiltrot.local_tilt_angle` and `helixtiltrot.local_rotation_angle` the HelixTiltRot has a module `plot` containing three functions:\
-  18. `helixtiltrot.plot.rotation` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
-  19. `helixtiltrot.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)\
-  20. `helixtiltrot.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixtiltrot/blob/main/helixtiltrot/plot.py)
+The side angles are 2pi-periodic, therefore the [circular mean](https://en.wikipedia.org/wiki/Circular_mean), [circular variance](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) and [circular standard deviation](https://en.wikipedia.org/wiki/Directional_statistics#Dispersion) are implemented in the functions 15-17, respectively.
 
 
-The documentation of these 20 functions can be found from their docstrings. For example to see the documentation of `helixtiltrot.local_rotation_angle`:
+Plotting how quantities evolve in time in given coordinate file is a common starting point for an analysis. To quickly plot arrays obtained from example `helixside.local_tilt_angle` and `helixside.local_side_angle` the HelixTiltRot has a module `plot` containing three functions:\
+  18. `helixside.plot.polar` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)\
+  19. `helixside.plot.angle_map` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)\
+  20. `helixside.plot.angle_density` [\[source\]](https://github.com/SakariPirnes/helixside/blob/main/helixside/plot.py)
+
+
+The documentation of these 20 functions can be found from their docstrings. For example to see the documentation of `helixside.local_side_angle`:
 ```
 >>> 
->>> import helixtiltrot
->>> print(helixtiltrot.local_rotation_angle.__doc__)
+>>> import helixside
+>>> print(helixside.local_side_angle.__doc__)
 
 
-    Compute the local rotation angles from alpha-carbon coordinates, relative
+    Compute the local side angles from alpha-carbon coordinates, relative
     to chosen reference vector.
 
-    Returns a new 1-D array of the local rotation angles in phase of residue
+    Returns a new 1-D array of the local side angles in phase of residue
     `phase`, in radians, in range ]-pi,pi].
     
 
@@ -94,12 +94,12 @@ The documentation of these 20 functions can be found from their docstrings. For 
 
     Returns
     -------
-    local_rot : ndarray of `numpy.float64`s
-        Returns a new 1-D array of rotation angle in phase of residue `phase`,
-        in radians, in range ]-pi,pi]. The shape of `local_rot` is (nf,nr).
+    local_side : ndarray of `numpy.float64`s
+        Returns a new 1-D array of side angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `local_side` is (nf,nr).
 
     
 >>>
 ```
 ### Examples
-To get an idea how the 20 functions provided in HelixTiltRot can be used, two example analysis done with HelixTiltRot can be found from chapter 4 of [the BSc thesis](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf). The python scripts to produce the figures of these two examples can be found from folders [Example1](https://github.com/SakariPirnes/helixtiltrot/tree/main/Examples/Example1) and [Example2](https://github.com/SakariPirnes/helixtiltrot/tree/main/Examples/Example1).
+To get an idea how the 20 functions provided in HelixTiltRot can be used, two example analysis done with HelixTiltRot can be found from chapter 4 of [the BSc thesis](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf). The python scripts to produce the figures of these two examples can be found from folders [Example1](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1) and [Example2](https://github.com/SakariPirnes/helixside/tree/main/Examples/Example1).

@@ -1,7 +1,7 @@
 import numpy as np
 from mdtraj import load, compute_dssp
-from helixtiltrot.heart import *
-from helixtiltrot import types
+from helixside.heart import *
+from helixside import types
 from warnings import catch_warnings, simplefilter
 
 

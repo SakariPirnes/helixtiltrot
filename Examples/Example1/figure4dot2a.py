@@ -1,4 +1,4 @@
-import helixtiltrot as htr
+import helixside
 
 
 # input coordinate files
@@ -7,7 +7,7 @@ xtc = 'transmembrane-alpha-helix.xtc'
 
 
 
-ca, dssp = htr.load_ca_dssp(xtc, top=pdb)
+ca, dssp = helixside.load_ca_dssp(xtc, top=pdb)
 
 
 
@@ -16,11 +16,11 @@ k = [0,0,1]
 
 
 
-local_tilt = htr.local_tilt_angle(ca, ref_vec=k)
+local_tilt = helixside.local_tilt_angle(ca, ref_vec=k)
 
 
 # plot the colormap
-fig, ax, cb = htr.plot.angle_map(local_tilt, clim=[0,90], cmap="jet")
+fig, ax, cb = helixside.plot.angle_map(local_tilt, clim=[0,90], cmap="jet")
 
 
 

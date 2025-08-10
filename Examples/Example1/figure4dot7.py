@@ -1,4 +1,4 @@
-import helixtiltrot as htr
+import helixside
 
 
 # input coordinate files
@@ -7,14 +7,14 @@ xtc = 'transmembrane-alpha-helix.xtc'
 
 
 
-ca, dssp = htr.load_ca_dssp(xtc, top=pdb)
+ca, dssp = helixside.load_ca_dssp(xtc, top=pdb)
 
 
 
 # create numpy mask called sse_mask, such that
 # sse_mask[n,i] == True if the residue i at time step n
 # is either alpha-helix (H), pi-helix (I) or 310-helix
-sse_mask = htr.sse_mask(dssp, sse='HIG')
+sse_mask = helixside.sse_mask(dssp, sse='HIG')
 
 
 
@@ -24,11 +24,11 @@ kappa = [1,1,0] # orthogonal vector to the membrane normal [0,0,1]
 
 l = 10
 turn_angle_deg=100.1
-side_kappa_15to26 = htr.side_angle(ca, kappa, turn_angle_deg, l, mask=sse_mask, m=15,n=26 )
+side_kappa_15to26 = helixside.side_angle(ca, kappa, turn_angle_deg, l, mask=sse_mask, m=15,n=26 )
 
 
 
-fig, axs = htr.plot.polar(side_kappa_15to26, ncols=1)
+fig, axs = helixside.plot.polar(side_kappa_15to26, ncols=1)
 
 
 

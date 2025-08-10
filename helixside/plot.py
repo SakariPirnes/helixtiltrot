@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
-from helixtiltrot.core import *
-from helixtiltrot import types
+from helixside.core import *
+from helixside import types
 
 
 __all__ = [ 'polar', "angle_map","angle_density" ]

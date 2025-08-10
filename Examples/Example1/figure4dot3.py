@@ -1,4 +1,4 @@
-import helixtiltrot as htr
+import helixside
 from matplotlib.pyplot import subplots
 import numpy as np
 
@@ -8,13 +8,13 @@ xtc = 'transmembrane-alpha-helix.xtc'
 
 
 
-ca, dssp = htr.load_ca_dssp(xtc, top=pdb)
+ca, dssp = helixside.load_ca_dssp(xtc, top=pdb)
 
 
 # create numpy mask called sse_mask, such that
 # sse_mask[n,i] == True if the residue i at time step n
 # is either alpha-helix (H), pi-helix (I) or 310-helix
-sse_mask = htr.sse_mask(dssp, sse='HIG')
+sse_mask = helixside.sse_mask(dssp, sse='HIG')
 
 
 
@@ -23,12 +23,12 @@ k = [0,0,1]
 
 
 # tilt of residue 3,4,...,14 and 16,...,26
-tilt_3to14 = htr.tilt_angle(ca, ref_vec=k, mask=sse_mask, m=3,n=15)
-tilt_16to26 = htr.tilt_angle(ca, ref_vec=k, mask=sse_mask, m=16,n=27)
+tilt_3to14 = helixside.tilt_angle(ca, ref_vec=k, mask=sse_mask, m=3,n=15)
+tilt_16to26 = helixside.tilt_angle(ca, ref_vec=k, mask=sse_mask, m=16,n=27)
 
 
 # kink angle between residues 3,4,...,14 and 16,...,26
-kink_angle = htr.kink_angle(ca, mask=None, m1=3, n1=15, m2=16, n2=27)
+kink_angle = helixside.kink_angle(ca, mask=None, m1=3, n1=15, m2=16, n2=27)
 
 
 
