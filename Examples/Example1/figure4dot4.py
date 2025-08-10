@@ -16,7 +16,7 @@ k = [0,0,1]
 
 
 
-local_rot = htr.local_rotation_angle(ca, ref_vec=k)
+local_side = htr.local_side_angle(ca, ref_vec=k)
 
 
 
@@ -26,8 +26,8 @@ residues = range(6,11+1)
 
 
 
-# Plot local rotation angles for each residue.
-fig, axs = htr.plot.rotation(local_rot,residues=residues, ncols=3)
+# Plot local side angles for each residue.
+fig, axs = htr.plot.polar(local_side,residues=residues, ncols=3)
 
 
 

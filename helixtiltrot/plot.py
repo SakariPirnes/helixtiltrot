@@ -6,10 +6,10 @@ from helixtiltrot.core import *
 from helixtiltrot import types
 
 
-__all__ = [ 'rotation', "angle_map","angle_density" ]
+__all__ = [ 'polar', "angle_map","angle_density" ]
 
 
-def rotation(rot_angle,residues='all',ncols=3):
+def polar(angles,residues='all',ncols=3):
 
     """
 
@@ -18,13 +18,13 @@ def rotation(rot_angle,residues='all',ncols=3):
 
     """
     
-    rot_angle = types.array(rot_angle,'rot_angle')
+    angles = types.array(angles,'angles')
     
 
-    if rot_angle.ndim ==1:
-        rot_angle = rot_angle.reshape(rot_angle.size,1)
+    if angles.ndim ==1:
+        angles = angles.reshape(angles.size,1)
   
-    n_frame, n_res = rot_angle.shape
+    n_frame, n_res = angles.shape
     
     
     # Check residues argument
@@ -48,17 +48,17 @@ def rotation(rot_angle,residues='all',ncols=3):
     # Statistics of residues
     
     
-    rot_angle_mt = circular_mean(rot_angle, axis=0)
+    angles_mt = circular_mean(angles, axis=0)
     
     
-    Rs = 1-circular_var(rot_angle, axis=0)
+    Rs = 1-circular_var(angles, axis=0)
     
     
-    circ_std = circular_std(rot_angle, axis=0)
+    circ_std = circular_std(angles, axis=0)
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
 
-    rot_angle = rot_angle.T
+    angles = angles.T
 
     
     
@@ -78,10 +78,10 @@ def rotation(rot_angle,residues='all',ncols=3):
     for i_fig, i_res in enumerate(residues):
         
         # Values for residue i_res
-        angles = rot_angle[i_res]
+        angles_i = angles[i_res]
         R = Rs[i_res]
         SD = circ_std[i_res] * 180/np.pi
-        mean_angle = rot_angle_mt[i_res] * 180/np.pi
+        mean_angle = angles_mt[i_res] * 180/np.pi
         
         
         #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -94,7 +94,7 @@ def rotation(rot_angle,residues='all',ncols=3):
         
 
         #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        # Plot angles
+        # Plot angles_i
         
         # Figure axis
         ax = fig.add_subplot(nrows,ncols,i_fig+1,projection='polar')
@@ -110,20 +110,20 @@ def rotation(rot_angle,residues='all',ncols=3):
 
         # Filtter nan values
         
-        nan_mask = ~np.isnan(angles)
+        nan_mask = ~np.isnan(angles_i)
         
-        angles = angles[nan_mask]
+        angles_i = angles_i[nan_mask]
         
         time = time[nan_mask]
         
-        ax.plot(angles,time,'o',markersize=3)
+        ax.plot(angles_i,time,'o',markersize=3)
         #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         
         
         #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         # Title and labels
         
-        ax.set_title('RES{}, rotation={}$^\circ\pm${}$^\circ$'.format(i_res,mean_angle,
+        ax.set_title('RES{}, angle={}$^\circ\pm${}$^\circ$'.format(i_res,mean_angle,
                                                              SD,), fontsize = 30)
         
         ax.set_xticklabels(['0'+deg_sign, '45'+deg_sign, '90'+deg_sign, '135'+deg_sign
@@ -141,7 +141,7 @@ def rotation(rot_angle,residues='all',ncols=3):
         # Plot mean vector
         
         
-        ax.arrow(rot_angle_mt[i_res], 0, 0, R*n_frame, alpha = 0.7,
+        ax.arrow(angles_mt[i_res], 0, 0, R*n_frame, alpha = 0.7,
                                     width = 0.09, length_includes_head=True,
                                     head_width = 0.25, head_length = 0.2*n_frame*R,
                                     edgecolor = 'red', facecolor = 'red', lw = 2, zorder = 5)        

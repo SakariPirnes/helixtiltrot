@@ -23,14 +23,14 @@ k = [0,0,1]
 
 
 
-local_rot = htr.local_rotation_angle(ca, ref_vec=k, mask=sse_mask)
+local_side = htr.local_side_angle(ca, ref_vec=k, mask=sse_mask)
 
 
-# Change local rotation angles into phase of residue 10
-local_rot_10 = htr.single_phase(local_rot,phase=10, turn_angle_deg=100.1 )
+# Change local side angles into phase of residue 10
+local_side_10 = htr.single_phase(local_side,phase=10, turn_angle_deg=100.1 )
 
 
-fig, ax, cb = htr.plot.angle_map(local_rot_10)
+fig, ax, cb = htr.plot.angle_map(local_side_10)
 
 
 
@@ -42,7 +42,7 @@ fig, ax, cb = htr.plot.angle_map(local_rot_10)
 ax.set_xlabel('Time (ns)')
 ax.tick_params(labelsize=25)
 
-cb.set_label('Local rotation angle (deg)')
+cb.set_label('Local side angle (deg)')
 cb.ax.tick_params(labelsize=25)
 """
 

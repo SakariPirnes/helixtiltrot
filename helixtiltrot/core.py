@@ -7,7 +7,7 @@ from warnings import catch_warnings, simplefilter
 
  
 
-__all__ = ['load_ca_dssp','local_axes', 'axis', 'kink_angle','center_points','tilt_vectors','rotation_vectors','tilt_angle', 'local_tilt_angle','local_rotation_angle','rotation_angle','single_phase','sse_mask','angle_diff','circular_mean','circular_var','circular_std']
+__all__ = ['load_ca_dssp','local_axes', 'axis', 'kink_angle','center_points','tilt_vectors','side_vectors','tilt_angle', 'local_tilt_angle','local_side_angle','side_angle','single_phase','sse_mask','angle_diff','circular_mean','circular_var','circular_std']
 
 
 
@@ -402,7 +402,7 @@ def tilt_vectors(ca, mask=None):
     Returns
     -------
     tilt_vec : ndarray of `numpy.float64`s
-        Returns a new 3-D array of (normalized) rotation vectors. 
+        Returns a new 3-D array of (normalized) side vectors. 
         The `tilt_vec` has the same shape as `ca`.
 
     """
@@ -509,13 +509,13 @@ def center_points(ca, mask=None):
 
 
 
-def rotation_vectors(ca, mask=None):
+def side_vectors(ca, mask=None):
 
     """
 
-    Compute the rotation vectors from alpha-carbon coordinates.
+    Compute the side vectors from alpha-carbon coordinates.
 
-    Returns a new 3-D array of (normalized) rotation vectors.
+    Returns a new 3-D array of (normalized) side vectors.
 
 
     Parameters
@@ -533,30 +533,30 @@ def rotation_vectors(ca, mask=None):
 
     Returns
     -------
-    rot_vec : ndarray of `numpy.float64`s
-        Returns a new 3-D array of (normalized) rotation vectors. 
-        The `rot_vec` has the same shape as `ca`.
+    side_vec : ndarray of `numpy.float64`s
+        Returns a new 3-D array of (normalized) side vectors. 
+        The `side_vec` has the same shape as `ca`.
 
     """
 
     h = local_axes(ca, mask=mask)
 
 
-    return h_to_rotvecs(h,ca)
+    return h_to_sidevecs(h,ca)
 
 
 
 
 
-def local_rotation_angle( ca, ref_vec, mask=None ):
+def local_side_angle( ca, ref_vec, mask=None ):
 
 
     """
 
-    Compute the local rotation angles from alpha-carbon coordinates, relative
+    Compute the local side angles from alpha-carbon coordinates, relative
     to chosen reference vector.
 
-    Returns a new 1-D array of the local rotation angles in phase of residue
+    Returns a new 1-D array of the local side angles in phase of residue
     `phase`, in radians, in range ]-pi,pi].
     
 
@@ -579,9 +579,9 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
 
     Returns
     -------
-    local_rot : ndarray of `numpy.float64`s
-        Returns a new 1-D array of rotation angle in phase of residue `phase`,
-        in radians, in range ]-pi,pi]. The shape of `local_rot` is (nf,nr).
+    local_side : ndarray of `numpy.float64`s
+        Returns a new 1-D array of side angle in phase of residue `phase`,
+        in radians, in range ]-pi,pi]. The shape of `local_side` is (nf,nr).
 
     """
 
@@ -595,7 +595,7 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
 
 
     t_vec = h_to_tiltvecs(h)
-    r_vec = h_to_rotvecs(h,ca)
+    s_vec = h_to_sidevecs(h,ca)
 
 
 
@@ -603,51 +603,51 @@ def local_rotation_angle( ca, ref_vec, mask=None ):
     t_cross_k = np.cross(t_vec, k)
 
 
-    r_dot_t_cross_k = r_vec * t_cross_k
-    r_dot_t_cross_k = r_dot_t_cross_k[:,:,0] + r_dot_t_cross_k[:,:,1] + r_dot_t_cross_k[:,:,2]
+    s_dot_t_cross_k = s_vec * t_cross_k
+    s_dot_t_cross_k = s_dot_t_cross_k[:,:,0] + s_dot_t_cross_k[:,:,1] + s_dot_t_cross_k[:,:,2]
 
 
-    return np.arctan2( r_dot_t_cross_k, dot(r_vec,k) )
+    return np.arctan2( s_dot_t_cross_k, dot(s_vec,k) )
 
 
 
-def single_phase(local_rot, turn_angle_deg, phase):
+def single_phase(local_side, turn_angle_deg, phase):
     
 
     """
 
-    Shift local rotation angles in radians into local rotation angles in phase
+    Shift local side angles in radians into local side angles in phase
     of residue `phase`, in radians .
 
-    Returns a new array of local rotation angles in phase of residue `phase`, 
+    Returns a new array of local side angles in phase of residue `phase`, 
     in radians, in range ]-pi,pi].
     
 
     Parameters
     ----------
-    local_rot : array_like
-        Array containing local rotation angles. If `local_rot` is not an
+    local_side : array_like
+        Array containing local side angles. If `local_side` is not an
         array of `numpy.float64`s, a conversion is attempted.
     turn_angle_deg : float or int
         The turn angle in degrees.
     phase : int
-        Desired phase for `local_rot`
+        Desired phase for `local_side`
 
     Returns
     -------
-    local_rot_phase : ndarray of `numpy.float64`s
-        Returns a new array of local rotation angles in phase of residue `phase`, 
+    local_side_phase : ndarray of `numpy.float64`s
+        Returns a new array of local side angles in phase of residue `phase`, 
         in radians, in range ]-pi,pi].
 
 
     """
 
-    local_rot = types.array(local_rot, 'local_rot')
+    local_side = types.array(local_side, 'local_side')
 
 
 
     # Numper of residues
-    n_res = local_rot.shape[-1]
+    n_res = local_side.shape[-1]
 
 
 
@@ -689,15 +689,15 @@ def single_phase(local_rot, turn_angle_deg, phase):
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     
-    local_rot_in_chosen_phase = local_rot + phase_angles
+    local_side_in_chosen_phase = local_side + phase_angles
 
-    not_nan = ~np.isnan(local_rot_in_chosen_phase)
-    local_rot_in_chosen_phase[not_nan] =  np.pi - (( np.pi - local_rot_in_chosen_phase[not_nan] ) % (2 * np.pi ))
-
-
+    not_nan = ~np.isnan(local_side_in_chosen_phase)
+    local_side_in_chosen_phase[not_nan] =  np.pi - (( np.pi - local_side_in_chosen_phase[not_nan] ) % (2 * np.pi ))
 
 
-    return local_rot_in_chosen_phase
+
+
+    return local_side_in_chosen_phase
 
 
 
@@ -749,14 +749,14 @@ def circular_mean(data,  axis=None):
 
 
 
-def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
+def side_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
     """
 
-    Compute the rotation angle from alpha-carbon coordinates of residues
+    Compute the side angle from alpha-carbon coordinates of residues
     m,...,n-1, relative to a chosen reference vector.
 
-    Returns a new 1-D array of rotation angles in phase of residue `phase`, 
+    Returns a new 1-D array of side angles in phase of residue `phase`, 
     in radians, in range ]-pi,pi].
     
 
@@ -775,7 +775,7 @@ def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
     turn_angle_deg : float or int
         The turn angle in degrees.
     phase : int
-        Desired phase for `local_rot`.
+        Desired phase for `local_side`.
     mask : array_like or None, optional
         numpy mask with shape (nf,nr). Mask determines which `ca` atoms
         will be used. Default is None which is equivalent
@@ -788,20 +788,20 @@ def rotation_angle(ca, ref_vec, turn_angle_deg, phase, mask=None, m=0, n=None):
 
     Returns
     -------
-    rot : ndarray of `numpy.float64`s
-        Returns a new 1-D array of rotation angle of residues
+    side : ndarray of `numpy.float64`s
+        Returns a new 1-D array of side angle of residues
         m,...,n-1, relative to a chosen reference vector in phase of residue `phase`,
-        in radians, in range ]-pi,pi]. The shape of `rot` is (nf,).
+        in radians, in range ]-pi,pi]. The shape of `side` is (nf,).
 
     """
 
 
-    local_rot = local_rotation_angle( ca, ref_vec, mask=mask )
+    local_side = local_side_angle( ca, ref_vec, mask=mask )
 
-    rot = single_phase(local_rot, turn_angle_deg, phase)
+    side = single_phase(local_side, turn_angle_deg, phase)
 
 
-    return circular_mean(rot[:,m:n],  axis=1)
+    return circular_mean(side[:,m:n],  axis=1)
 
 
  
@@ -892,7 +892,7 @@ def circular_var(data,  axis=None):
 
 
 
-    # We asume period of the data is 2pi, e.g. an array of rotation angles
+    # We asume period of the data is 2pi, e.g. an array of side angles
 
     data_in_complex_plane = np.exp(1j*data)
     
@@ -940,7 +940,7 @@ def circular_std(data,  axis=None):
     data = types.array(data,'angles')
 
 
-    # We asume period of the data is 2pi, e.g. an array of rotation angles
+    # We asume period of the data is 2pi, e.g. an array of side angles
 
     data_in_complex_plane = np.exp(1j*data)
 

@@ -4,7 +4,7 @@ import numpy as np
 #from helixstate import types
  
 
-__all__ = ['dot','normalize','h_to_centerpoints','h_to_tiltvecs','h_to_rotvecs']
+__all__ = ['dot','normalize','h_to_centerpoints','h_to_tiltvecs','h_to_sidevecs']
 
 
 
@@ -145,7 +145,7 @@ def h_to_tiltvecs(h):
 
 
 
-def h_to_rotvecs(h,ca):
+def h_to_sidevecs(h,ca):
 
 
 
@@ -157,7 +157,7 @@ def h_to_rotvecs(h,ca):
 
 
     #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-    # Calculate rotation vectors
+    # Calculate side vectors
 
     M = (m[:,1:]+m[:,:-1])/2
     end = M.shape[1]
@@ -165,18 +165,18 @@ def h_to_rotvecs(h,ca):
     
     
     # It is in the same plane with the vector between alpha carbon atom and middle point
-    r_vecs = ca - M
+    s_vecs = ca - M
     
     
     # Now we just need to make it perpendicular to the tilt vector
-    r_vecs = r_vecs - ( np.sum(t_vecs*r_vecs, axis=-1).T * t_vecs.T ).T
+    s_vecs = s_vecs - ( np.sum(t_vecs*s_vecs, axis=-1).T * t_vecs.T ).T
     
 
-    r_vecs = normalize( r_vecs )
+    s_vecs = normalize( s_vecs )
 
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
-    return r_vecs
+    return s_vecs
     
 
 

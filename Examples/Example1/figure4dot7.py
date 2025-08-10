@@ -24,11 +24,11 @@ kappa = [1,1,0] # orthogonal vector to the membrane normal [0,0,1]
 
 l = 10
 turn_angle_deg=100.1
-rot_kappa_15to26 = htr.rotation_angle(ca, kappa, turn_angle_deg, l, mask=sse_mask, m=15,n=26 )
+side_kappa_15to26 = htr.side_angle(ca, kappa, turn_angle_deg, l, mask=sse_mask, m=15,n=26 )
 
 
 
-fig, axs = htr.plot.rotation(rot_kappa_15to26, ncols=1)
+fig, axs = htr.plot.polar(side_kappa_15to26, ncols=1)
 
 
 

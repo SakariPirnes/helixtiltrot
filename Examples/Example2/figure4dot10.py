@@ -37,13 +37,13 @@ H_B = htr.axis(caB_1afo, mask = sse_maskB_1afo)
 k_1afo = (H_A+H_B)[0] # no need to normalize
 
 
-# compute local rotation of chain B
-local_rot_B = htr.local_rotation_angle(caB_1afo, k_1afo, mask=sse_maskB_1afo)
+# compute local side angle of chain B
+local_side_B = htr.local_side_angle(caB_1afo, k_1afo, mask=sse_maskB_1afo)
 
 
 
 ##########################################
-##### rotation difference between 1afo and monomer trjectories
+##### side angle difference between 1afo and monomer trjectories
 ##########################################
 
 
@@ -53,9 +53,9 @@ k_M = [0,0,1] # bilayer normal for simulations
 use_ns = 2000
 
 
-# looping over trajectories and calculating rotation difference
-diff_rot_angles = []
-rot_labels = []
+# looping over trajectories and calculating side angle difference
+diff_side_angles = []
+side_labels = []
 
 for j in range(1, 5+1):
     pdb = '{}monomer.pdb'.format(j)
@@ -72,42 +72,42 @@ for j in range(1, 5+1):
     
     
     # tilt of monomer
-    local_rot_M = htr.local_rotation_angle(ca, k_M, mask=sse_mask)
+    local_side_M = htr.local_side_angle(ca, k_M, mask=sse_mask)
     
     
     # difference between dimer and monomer
-    diff_local_rot = htr.angle_diff(local_rot_M,local_rot_B)
-    diff_rot = htr.circular_mean(diff_local_rot,axis=1)
-    diff_rot_angles.append(diff_rot)
+    diff_local_side = htr.angle_diff(local_side_M,local_side_B)
+    diff_side = htr.circular_mean(diff_local_side,axis=1)
+    diff_side_angles.append(diff_side)
     
     
     #label for figure legend
-    rot_mean = htr.circular_mean(diff_rot)*180/np.pi
-    rot_mean = '{0:.1f}'.format( rot_mean )
-    rot_std  = htr.circular_std(diff_rot) *180/np.pi
-    rot_std  = '{0:.1f}'.format( rot_std )
-    label    = 'j={}: $(\mu_{}, \sigma_{})=({}^\circ, \ {}^\circ)$'.format(j,j,j,rot_mean,rot_std)
-    rot_labels.append(label)
+    side_mean = htr.circular_mean(diff_side)*180/np.pi
+    side_mean = '{0:.1f}'.format( side_mean )
+    side_std  = htr.circular_std(diff_side) *180/np.pi
+    side_std  = '{0:.1f}'.format( side_std )
+    label    = 'j={}: $(\mu_{}, \sigma_{})=({}^\circ, \ {}^\circ)$'.format(j,j,j,side_mean,side_std)
+    side_labels.append(label)
     
 
-diff_rot_angles = np.asarray(diff_rot_angles)
+diff_side_angles = np.asarray(diff_side_angles)
 
 
-rot_mean = htr.circular_mean(diff_rot_angles)*180/np.pi
-rot_mean  ='{0:.1f}'.format(rot_mean)
-
-
-
-rot_std  = htr.circular_std(diff_rot_angles)*180/np.pi
-rot_std  ='{0:.1f}'.format(rot_std)
+side_mean = htr.circular_mean(diff_side_angles)*180/np.pi
+side_mean  ='{0:.1f}'.format(side_mean)
 
 
 
-diff_rot_angles[diff_rot_angles<0] = 2*np.pi + diff_rot_angles[diff_rot_angles<0]
-fig, ax = htr.plot.angle_density(diff_rot_angles, clim=[0,360], plot_many=True, bins=20,figsize=(15,7))
+side_std  = htr.circular_std(diff_side_angles)*180/np.pi
+side_std  ='{0:.1f}'.format(side_std)
 
 
-ax.legend(loc="upper right", fontsize=20, labels=rot_labels)
+
+diff_side_angles[diff_side_angles<0] = 2*np.pi + diff_side_angles[diff_side_angles<0]
+fig, ax = htr.plot.angle_density(diff_side_angles, clim=[0,360], plot_many=True, bins=20,figsize=(15,7))
+
+
+ax.legend(loc="upper right", fontsize=20, labels=side_labels)
 
 
 ax.set_xticks([0,45,90,135,180,360-135,360-90,360-45,360])
@@ -115,7 +115,7 @@ ax.set_xticklabels([0,45,90,135,180,-135,-90,-45,0],fontsize=15)
 
 
 ax.set_xlabel('$\Theta^{M_j}(t)-\Theta^B$ (deg)', fontsize= 30)
-ax.set_title('$(\mu_{all}, \sigma_{all})=({%s}^\circ, \ {%s}^\circ)$' %(rot_mean,rot_std), 
+ax.set_title('$(\mu_{all}, \sigma_{all})=({%s}^\circ, \ {%s}^\circ)$' %(side_mean,side_std), 
             fontsize = 40)
 ax.tick_params(labelsize=20)
 fig.set_size_inches(15,8)

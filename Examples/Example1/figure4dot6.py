@@ -24,18 +24,18 @@ k = [0,0,1]
 
 
 l = 10
-rot_5to14 = htr.rotation_angle(ca, k, mask=sse_mask, phase=l, turn_angle_deg=100.1, m=5,n=15 )
-rot_15to26= htr.rotation_angle(ca, k, mask=sse_mask, phase=l, turn_angle_deg=100.1, m=15,n=27 )
+side_5to14 = htr.side_angle(ca, k, mask=sse_mask, phase=l, turn_angle_deg=100.1, m=5,n=15 )
+side_15to26= htr.side_angle(ca, k, mask=sse_mask, phase=l, turn_angle_deg=100.1, m=15,n=27 )
 
 
 
-# Merge rotation angles rot_5to14 and rot_15to26
-rotation_angles = np.array([rot_5to14,rot_15to26]).T
+# Merge side angles side_5to14 and side_15to26
+side_angles = np.array([side_5to14,side_15to26]).T
 
 
 
-# Plot rotaion angles
-fig, axs = htr.plot.rotation(rotation_angles, ncols=2)
+# Plot side angles
+fig, axs = htr.plot.polar(side_angles, ncols=2)
 
 
 
