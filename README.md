@@ -3,7 +3,7 @@
 A python implementation of the method constructed in BSc thesis:
 
 [Analytical method for calculating
-geometrical metrics for protein structures](https://github.com/SakariPirnes/helixtiltrot/blob/main/documentation-BSc_pirnes.pdf).
+geometrical metrics for protein structures](https://github.com/SakariPirnes/helixside/blob/main/Pirnes_Sakari_BSc_thesis.pdf).
 
 ## Installation
 
